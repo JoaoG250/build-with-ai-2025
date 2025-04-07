@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="mb-4">Gallery</h1>
+<a class="btn btn-primary mb-4" href="{% url 'photo-create' %}">Add Photo</a>
+<div class="row">
+  {% for photo in photo_list %}
+  <div class=" col-lg-4 col-md-6 col-sm-12 mb-4">
+    <div class="card" style="height: 360px;">
+      <img src=" {{ photo.image.url }}" class="card-img-top" style="max-height: 230px; object-fit: cover;"
+        alt="{{ photo.title }}">
+      <div class="card-body pt-2 {% if photo.tags.all.count > 0 %}pb-2{% endif %}">
+        <h5 class="card-title mb-2">{{ photo.title }}</h5>
+        <div class="d-flex justify-content-center">
+          <a class="btn btn-secondary me-3" href="{% url 'photo-update' photo.id %}" role="button">Update</a>
+          {% include "photos/photo_list_delete_modal.html" with photo=photo %}
+        </div>
+      </div>
+      {% if photo.tags.all.count > 0 %}
+      <div class="card-footer" style="overflow-y: auto;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tags"
+          viewBox="0 0 16 16">
+          <path
+            d="M3 2v4.586l7 7L14.586 9l-7-7zM2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586z" />
+          <path
+            d="M5.5 5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1m0 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3M1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1z" />
+        </svg>
+        <span>Tags:</span>
+        {% for tag in photo.tags.all %}
+        <a class="btn {{ tag.get_color_class }}"
+          style="--bs-btn-padding-y: .1rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+          href="{% url 'photo-list' %}?tag={{ tag.name }}" role="button">
+          {{ tag.name }}
+        </a>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% empty %}
+  <div class="alert alert-secondary" role="alert">
+    No photos.
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}

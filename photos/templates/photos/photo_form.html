@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+<h1 class="mb-4">{% if view.object.pk %}Update{% else %}Create{% endif %} Photo</h1>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="{{ form.title.id_for_label }}" class="form-label">Title</label>
+    {{ form.title|add_class:"form-control" }}
+  </div>
+  <div class="mb-3">
+    <label for="{{ form.image.id_for_label }}" class="form-label">Image</label>
+    {{ form.image|add_class:"form-control" }}
+  </div>
+  {% if form.tags %}
+  <div class="mb-3">
+    <label for="{{ form.tags.id_for_label }}" class="form-label">Tags</label>
+    {{ form.tags|add_class:"form-select" }}
+  </div>
+  {% endif %}
+  <div class="d-flex justify-content-start">
+    <a href="{% url 'photo-list' %}" class="btn btn-secondary me-2">Cancel</a>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </div>
+</form>
+{% endblock %}

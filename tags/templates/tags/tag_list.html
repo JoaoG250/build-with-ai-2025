@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+<h1 class="mb-4">Tags</h1>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createTagModal">
+  Add new tag
+</button>
+<div class="modal fade" id="createTagModal" tabindex="-1" aria-labelledby="createTagModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="createTagModalLabel">Add tag</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form method="post">
+        {% csrf_token %}
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="{{ form.name.id_for_label }}" class="form-label">Name</label>
+            {{ form.name|add_class:"form-control" }}
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="row mt-4">
+  <div class="col">
+    {% for tag in tag_list %}
+    <a class="btn {{ tag.get_color_class }} btn-sm me-2 mb-2" href="{% url 'photo-list' %}?tag={{ tag.name }}"
+      role="button">
+      {{ tag.name }}
+    </a>
+    {% empty %}
+    <div class="alert alert-secondary" role="alert">
+      No tags.
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}
