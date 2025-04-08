@@ -8,4 +8,4 @@ class Photo(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=200)
     image = models.ImageField(upload_to="images/")
-    tags = models.ManyToManyField(Tag, related_name="photos", blank=True, null=True)
+    tags = models.ManyToManyField(Tag, related_name="photos", blank=True)

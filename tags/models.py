@@ -9,7 +9,7 @@ class Tag(models.Model):
     def __str__(self) -> str:
         return self.name
 
-    def get_color_class(self):
+    def get_color_class(self) -> str:
         color_classes = [
             "btn-primary",
             "btn-secondary",
