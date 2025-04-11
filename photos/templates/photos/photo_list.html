@@ -29,7 +29,7 @@
         {% for tag in photo.tags.all %}
         <a class="btn {{ tag.get_color_class }}"
           style="--bs-btn-padding-y: .1rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-          href="{% url 'photo-list' %}?tag={{ tag.name }}" role="button">
+          href="{% url 'photo-list' %}?tag={{ tag.name|urlencode }}" role="button">
           {{ tag.name }}
         </a>
         {% endfor %}
