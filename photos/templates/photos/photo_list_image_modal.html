@@ -1,0 +1,24 @@
+<button type="button" class="btn btn-light photo-image-expand-button" data-bs-toggle="modal"
+  data-bs-target="#imageModalPhoto{{ photo.id }}">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-angle-expand"
+    viewBox="0 0 16 16">
+    <path fill-rule="evenodd"
+      d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707m4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707" />
+  </svg>
+</button>
+<div class="modal fade" id="imageModalPhoto{{ photo.id }}" tabindex="-1"
+  aria-labelledby="imageModalPhoto{{ photo.id }}Label" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="imageModalPhoto{{ photo.id }}Label">{{ photo.title }}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body photo-image-modal-body">
+        <div class="d-flex justify-content-center">
+          <img src="{{ photo.image.url }}" alt="{{ photo.title }}">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
